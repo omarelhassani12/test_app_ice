@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/secondpage.dart';
 import 'package:test_app/utils/colors/color.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _FirstPageState createState() => _FirstPageState();
 }
 
@@ -12,7 +14,7 @@ class _FirstPageState extends State<FirstPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   int _selectedFilterIndex = 0;
-  int _selectedGridIndex = 0;
+  final int _selectedGridIndex = 0;
 
   @override
   void dispose() {
@@ -139,7 +141,7 @@ class _FirstPageState extends State<FirstPage> {
                             itemCount: 4,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: EdgeInsets.all(6),
+                                padding: const EdgeInsets.all(6),
                                 child: GridItem(
                                   isSelected: index ==
                                       _selectedGridIndex, // Pass isSelected based on selection
@@ -244,6 +246,7 @@ class FilterButton extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _FilterButtonState createState() => _FilterButtonState();
 }
 
@@ -286,25 +289,35 @@ class GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 450,
-      child: Card(
-        color: isSelected ? AppColors.mainColor : Colors.white,
-        child: Stack(
-          children: [
-            Positioned(
-              top: 8,
-              right: 8,
-              child: Icon(
-                Icons.favorite_border,
-                color: isSelected ? Colors.white : AppColors.mainColor,
+    return GestureDetector(
+      onTap: () {
+        // Navigate to another page when clicked
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const SecondPage(), // Replace with your page
+          ),
+        );
+      },
+      child: SizedBox(
+        height: 450,
+        child: Card(
+          color: isSelected ? AppColors.mainColor : Colors.white,
+          child: Stack(
+            children: [
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Icon(
+                  Icons.favorite_border,
+                  color: isSelected ? Colors.white : AppColors.mainColor,
+                ),
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Image.asset("./assets/images/ice.png"),
-            ),
-          ],
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset("./assets/images/ice.png"),
+              ),
+            ],
+          ),
         ),
       ),
     );
