@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/lastpage.dart';
 import 'package:test_app/utils/colors/color.dart';
 
 class SecondPage extends StatefulWidget {
@@ -91,7 +92,7 @@ class _SecondPageState extends State<SecondPage> {
                           fit: BoxFit.cover, // Adjust the fit as needed
                         ),
                       ),
-                      const Column(
+                      Column(
                         mainAxisAlignment:
                             MainAxisAlignment.spaceEvenly, // Center vertically
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -102,17 +103,29 @@ class _SecondPageState extends State<SecondPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               SmallCard(
-                                icon: Icons.shopping_cart,
+                                icon: Icons.shopping_cart_outlined,
+                                onTapCallback: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        // Replace this with the page you want to navigate to
+                                        return const LastPage();
+                                      },
+                                    ),
+                                  );
+                                },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                   height: 20), // Add spacing between the cards
                               SmallCard(
                                 icon: Icons.add,
+                                onTapCallback: () {},
                               ),
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 20, bottom: 20),
+                            padding:
+                                const EdgeInsets.only(right: 20, bottom: 20),
                             child: Expanded(
                               flex: 1, // Takes one-third of the available space
                               child: Column(
@@ -121,7 +134,7 @@ class _SecondPageState extends State<SecondPage> {
                                 crossAxisAlignment: CrossAxisAlignment
                                     .end, // Center horizontally
                                 children: [
-                                  Text(
+                                  const Text(
                                     '\$ 13.99 ',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -129,30 +142,15 @@ class _SecondPageState extends State<SecondPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 10), // Add spacing
+                                  const SizedBox(height: 10), // Add spacing
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
+                                      for (int i = 0; i < 5; i++)
+                                        const Icon(
+                                          Icons.star,
+                                          color: Colors.white,
+                                        ),
                                     ],
                                   ),
                                 ],
@@ -354,31 +352,36 @@ class _FilterButtonState extends State<FilterButton> {
 
 class SmallCard extends StatelessWidget {
   final IconData icon;
+  final VoidCallback onTapCallback;
 
   const SmallCard({
     Key? key,
     required this.icon,
+    required this.onTapCallback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColors.bgColor.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Icon(
-              icon,
-              color: Colors.white,
-              size: 30,
-            ),
-          ],
+    return GestureDetector(
+      onTap: onTapCallback,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 20),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: AppColors.bgColor.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Icon(
+                icon,
+                color: Colors.white,
+                size: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
