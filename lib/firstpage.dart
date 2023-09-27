@@ -202,16 +202,9 @@ class _FirstPageState extends State<FirstPage> {
         2,
         (index) {
           return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 2),
             width: 10,
             height: 10,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-                width: 1.0,
-              ),
-            ),
             child: Center(
               child: Container(
                 width: 10,
@@ -222,7 +215,7 @@ class _FirstPageState extends State<FirstPage> {
                     color: _currentPage == index
                         ? AppColors.mainColor
                         : Colors.black,
-                    width: 1.0,
+                    width: 0.3,
                   ),
                   color: _currentPage == index
                       ? AppColors.mainColor
