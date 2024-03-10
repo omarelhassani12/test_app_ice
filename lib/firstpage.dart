@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:test_app/secondpage.dart';
 import 'package:test_app/utils/colors/color.dart';
@@ -9,6 +11,15 @@ class FirstPage extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _FirstPageState createState() => _FirstPageState();
 }
+
+List<String> imagePaths = [
+  "./assets/images/ice.png",
+  "./assets/images/ice0.png",
+  "./assets/images/ice1.png",
+  "./assets/images/ice2.png",
+  "./assets/images/ice3.png",
+  "./assets/images/ice4.png",
+];
 
 class _FirstPageState extends State<FirstPage> {
   final PageController _pageController = PageController();
@@ -138,13 +149,13 @@ class _FirstPageState extends State<FirstPage> {
                               crossAxisSpacing: 0,
                               childAspectRatio: 0.9,
                             ),
-                            itemCount: 4,
+                            itemCount: imagePaths.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(6),
                                 child: GridItem(
-                                  isSelected: index ==
-                                      _selectedGridIndex, // Pass isSelected based on selection
+                                  isSelected: index == _selectedGridIndex,
+                                  imagePath: imagePaths[index],
                                 ),
                               );
                             },
@@ -277,17 +288,20 @@ class _FilterButtonState extends State<FilterButton> {
 
 class GridItem extends StatelessWidget {
   final bool isSelected;
+  final String imagePath;
 
-  const GridItem({Key? key, this.isSelected = false}) : super(key: key);
+  const GridItem({Key? key, this.isSelected = false, required this.imagePath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Random random = Random();
+    final String price = (random.nextDouble() * 10).toStringAsFixed(2);
     return GestureDetector(
       onTap: () {
-        // Navigate to another page when clicked
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const SecondPage(), // Replace with your page
+            builder: (context) => const SecondPage(),
           ),
         );
       },
@@ -307,7 +321,19 @@ class GridItem extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Image.asset("./assets/images/ice.png"),
+                child: Image.asset(imagePath),
+              ),
+              Positioned(
+                bottom: 8,
+                left: 8,
+                child: Text(
+                  "\$$price",
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : AppColors.mainColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ],
           ),

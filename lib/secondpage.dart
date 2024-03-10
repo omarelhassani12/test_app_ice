@@ -13,6 +13,15 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   int _currentPage = 0;
 
+  List<String> imagePaths = [
+    "./assets/images/ice.png",
+    "./assets/images/ice0.png",
+    "./assets/images/ice1.png",
+    "./assets/images/ice2.png",
+    "./assets/images/ice3.png",
+    "./assets/images/ice4.png",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,8 +97,8 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(
                         flex: 2, // Takes two-thirds of the available space
                         child: Image.asset(
-                          './assets/images/ice.png',
-                          fit: BoxFit.cover, // Adjust the fit as needed
+                          imagePaths[index % imagePaths.length],
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Column(
@@ -135,7 +144,7 @@ class _SecondPageState extends State<SecondPage> {
                                     .end, // Center horizontally
                                 children: [
                                   const Text(
-                                    '\$ 13.99 ',
+                                    '\$ 1.28',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 30,

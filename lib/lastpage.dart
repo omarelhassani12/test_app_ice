@@ -10,7 +10,7 @@ class LastPage extends StatefulWidget {
 }
 
 class _LastPageState extends State<LastPage> {
-  int _currentPage = 0;
+  final int _currentPage = 0;
 
   final List<Item> items = [
     Item(
@@ -23,31 +23,7 @@ class _LastPageState extends State<LastPage> {
       title: 'Yellow ice Blue ice Blue ice cold Blue ice',
       quantity: 1,
       price: 5.99,
-      imagePath: './assets/images/ice.png',
-    ),
-    Item(
-      title: 'Blue ice Blue ice Blue ice',
-      quantity: 2,
-      price: 10.99,
-      imagePath: './assets/images/ice.png',
-    ),
-    Item(
-      title: 'Yellow ice Blue ice Blue ice cold Blue ice',
-      quantity: 1,
-      price: 5.99,
-      imagePath: './assets/images/ice.png',
-    ),
-    Item(
-      title: 'Blue ice Blue ice Blue ice',
-      quantity: 2,
-      price: 10.99,
-      imagePath: './assets/images/ice.png',
-    ),
-    Item(
-      title: 'Yellow ice Blue ice Blue ice cold Blue ice',
-      quantity: 1,
-      price: 5.99,
-      imagePath: './assets/images/ice.png',
+      imagePath: './assets/images/ice0.png',
     ),
   ];
 
